@@ -1,0 +1,36 @@
+{
+    "env": {
+        "node": true,
+        "es6": true,
+        "mocha": true
+    },
+    "extends": [
+        "google"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "strict": [
+            "error",
+            "global"
+        ],
+        "no-const-assign": "error",
+        "no-use-before-define": [
+            "error",
+            {
+                "functions": false
+            }
+        ],
+        "no-undef": "error",
+        "require-jsdoc": "off",
+        "max-len": [
+            "error",
+            {
+                "ignoreTemplateLiterals": true,
+                "ignoreStrings": true
+            }
+        ]
+    }
+}

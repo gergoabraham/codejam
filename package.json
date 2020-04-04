@@ -1,8 +1,19 @@
 {
   "name": "codejam-2020",
   "version": "1.0.0",
+  "author": "gergooo",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tdd": "mocha */*-spec.js --watch",
+    "test": "mocha */*-spec.js"
   },
-  "author": "gergooo"
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "mocha": "^7.1.1"
+  },
+  "mocha": {
+    "recursive": true,
+    "file": "./mocha-setup.js"
+  }
 }
