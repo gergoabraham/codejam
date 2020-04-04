@@ -1,9 +1,5 @@
 'use strict';
 
-function solveCase(input) {
-  return JSON.stringify(input);
-}
-
 function main() {
   const readline = require('readline');
   const rl = readline.createInterface({
@@ -11,45 +7,68 @@ function main() {
     output: process.stdout,
   });
 
-  let T;
-  let t;
-  let cases;
-  let n;
-
-  rl.on('line', (line) => {
-    if (!T) {
-      T = Number(line);
-      cases = Array(T);
-      t = 0;
-    } else {
-      if (!cases[t]) {
-        const N = Number(line);
-
-        cases[t] = {
-          N: N,
-          data: Array(N),
-        };
-        n = 0;
-      } else {
-        cases[t].data[n] = line.split(' ').map((x) => Number(x));
-        n++;
-
-        if (n == cases[t].N) {
-          t++;
-          if (t == T) {
-            rl.close();
-          }
-        }
-      }
-    }
-  })
-      .on('close', () => {
-        cases.forEach((x, i) => {
-          console.log(`Case #${i + 1}: ${solveCase(x)}`);
-        });
-      });
+  rl.on('line', lineReaderCallback(rl, console.log));
 }
 
-if (!global.test) {
+function lineReaderCallback(rl, outputCallback) {
+  let input = {
+    T: undefined,
+    cases: undefined,
+  };
+
+  let Ti = 0;
+  let Ni = 0;
+
+  return (line) => {
+    ({input, Ti, Ni} = collectInput(input, line, Ti, Ni));
+
+    if (Ti == input.T) {
+      rl.close();
+      returnWithResults(input, outputCallback);
+    }
+  };
+}
+
+function collectInput(input, line, Ti, Ni) {
+  if (!input.T) {
+    input.T = Number(line);
+    input.testCases = Array(input.T);
+  } else {
+    if (!input.testCases[Ti]) {
+      const N = Number(line);
+      input.testCases[Ti] = {
+        N: N,
+        data: Array(N),
+      };
+
+      Ni = 0;
+    } else {
+      input.testCases[Ti].data[Ni] = line.split(' ').map((x) => Number(x));
+      Ni++;
+
+      if (Ni == input.testCases[Ti].N) {
+        Ti++;
+      }
+    }
+  }
+
+  return {input, Ti, Ni};
+}
+
+function returnWithResults(input, outputCallback) {
+  input.testCases.forEach((testCase, i) => {
+    outputCallback(`Case #${i + 1}: ${solveTestCase(testCase)}`);
+  });
+}
+
+
+function solveTestCase(testCase) {
+  return JSON.stringify(testCase);
+}
+
+
+if (global.test) {
+  module.exports = {lineReaderCallback};
+} else {
   main();
 }
