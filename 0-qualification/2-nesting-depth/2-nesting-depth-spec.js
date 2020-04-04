@@ -31,6 +31,16 @@ describe.only('Nesting depth', function() {
     );
   });
 
+  it('some 0-9 tries', function() {
+    testForInputAndOutput(
+        `2
+        9
+        9850`,
+
+        `Case #1: (((((((((9)))))))))
+        Case #2: (((((((((9)8)))5)))))0`,
+    );
+  });
 
   function testForInputAndOutput(input, expectedOutput) {
     const actualOutputLines = [];

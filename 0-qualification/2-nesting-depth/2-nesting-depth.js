@@ -51,7 +51,8 @@ function solveTestCase(inputString) {
   const result = [];
 
   for (let i = 0; i < inputString.length; i++) {
-    const diff = Number(inputString[i]) - nestingIndex;
+    const currentValue = Number(inputString[i]);
+    const diff = currentValue - nestingIndex;
 
     if (diff > 0) {
       result.push(...Array(diff).fill('('));
@@ -59,15 +60,11 @@ function solveTestCase(inputString) {
       result.push(...Array(-diff).fill(')'));
     }
 
-    nestingIndex = inputString[i];
+    nestingIndex = currentValue;
     result.push(inputString[i]);
   }
 
-  if (nestingIndex > 0) {
-    result.push(...Array(nestingIndex).fill(')'));
-  } else if (nestingIndex < 0) {
-    result.push(...Array(-nestingIndex).fill('('));
-  }
+  result.push(...Array(nestingIndex).fill(')'));
 
   return result.join('');
 }
