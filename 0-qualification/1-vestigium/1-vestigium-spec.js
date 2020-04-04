@@ -23,9 +23,57 @@ describe('Vestigium', function() {
          1 3 2
          1 2 3`,
 
-        `Case #1: {"N":4,"data":[[1,2,3,4],[2,1,4,3],[3,4,1,2],[4,3,2,1]]}
-         Case #2: {"N":4,"data":[[2,2,2,2],[2,3,2,3],[2,2,2,3],[2,2,2,2]]}
-         Case #3: {"N":3,"data":[[2,1,3],[1,3,2],[1,2,3]]}`);
+        `Case #1: 4 0 0
+        Case #2: 9 4 4
+        Case #3: 8 0 2`);
+  });
+
+  it('natural Latin square matrix 1 - trace calculation', function() {
+    testForInputAndOutput(
+        `1
+         4
+         1 2 3 4
+         2 1 4 3
+         3 4 1 2
+         4 3 2 1`,
+
+        `Case #1: 4 0 0`);
+  });
+
+  it('natural Latin square matrix 2 - trace calculation', function() {
+    testForInputAndOutput(
+        `1
+         5
+         1 2 3 4 5
+         3 4 5 1 2
+         4 5 1 2 3
+         5 1 2 3 4
+         2 3 4 5 1`,
+
+        `Case #1: 10 0 0`);
+  });
+
+  it('another one', function() {
+    testForInputAndOutput(
+        `3
+         4
+         1 2 3 4
+         2 1 4 3
+         3 4 1 2
+         4 3 2 1
+         4
+         2 2 2 2
+         2 3 2 3
+         2 2 2 3
+         2 2 2 2
+         3
+         2 1 3
+         1 3 2
+         2 2 3`,
+
+        `Case #1: 4 0 0
+        Case #2: 9 4 4
+        Case #3: 8 1 2`);
   });
 
 

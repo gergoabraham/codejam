@@ -63,7 +63,40 @@ function returnWithResults(input, outputCallback) {
 
 
 function solveTestCase(testCase) {
-  return JSON.stringify(testCase);
+  let k = 0;
+  let r = 0;
+  let c = 0;
+  const matrix = testCase.data;
+
+  const numbersInAllColumns = Array(testCase.N);
+  for (let i = 0; i < numbersInAllColumns.length; i++) {
+    numbersInAllColumns[i] = {};
+  }
+
+  for (let x = 0; x < testCase.N; x++) {
+    const rowElements = {};
+
+    for (let y = 0; y < testCase.N; y++) {
+      rowElements[matrix[x][y]] = 1;
+      numbersInAllColumns[y][matrix[x][y]] = 1;
+
+      if (x == y) {
+        k += matrix[x][y];
+      }
+    }
+
+    if (Object.keys(rowElements).length != testCase.N) {
+      r++;
+    }
+  }
+
+  numbersInAllColumns.forEach((forOneColumn) => {
+    if (Object.keys(forOneColumn).length != testCase.N) {
+      c++;
+    }
+  });
+
+  return `${k} ${r} ${c}`;
 }
 
 
