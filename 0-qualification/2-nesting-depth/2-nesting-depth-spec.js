@@ -4,7 +4,7 @@ global.test = true;
 
 const {lineReaderCallback} = require('./2-nesting-depth');
 
-describe.only('Nesting depth', function() {
+describe('Nesting depth', function() {
   it('example test', function() {
     testForInputAndOutput(
         `4
