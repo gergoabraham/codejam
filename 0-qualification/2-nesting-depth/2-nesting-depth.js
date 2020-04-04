@@ -46,8 +46,30 @@ function returnWithResults(input, outputCallback) {
 }
 
 
-function solveTestCase(testCase) {
-  return `dummy`;
+function solveTestCase(inputString) {
+  let nestingIndex = 0;
+  const result = [];
+
+  for (let i = 0; i < inputString.length; i++) {
+    const diff = Number(inputString[i]) - nestingIndex;
+
+    if (diff > 0) {
+      result.push(...Array(diff).fill('('));
+    } else if (diff < 0) {
+      result.push(...Array(-diff).fill(')'));
+    }
+
+    nestingIndex = inputString[i];
+    result.push(inputString[i]);
+  }
+
+  if (nestingIndex > 0) {
+    result.push(...Array(nestingIndex).fill(')'));
+  } else if (nestingIndex < 0) {
+    result.push(...Array(-nestingIndex).fill('('));
+  }
+
+  return result.join('');
 }
 
 

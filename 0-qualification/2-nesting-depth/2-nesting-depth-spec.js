@@ -4,7 +4,7 @@ global.test = true;
 
 const {lineReaderCallback} = require('./2-nesting-depth');
 
-describe('Nesting depth', function() {
+describe.only('Nesting depth', function() {
   it('example test', function() {
     testForInputAndOutput(
         `4
@@ -16,7 +16,19 @@ describe('Nesting depth', function() {
         `Case #1: 0000
         Case #2: (1)0(1)
         Case #3: (111)000
-        Case #4: (1)`);
+        Case #4: (1)`,
+    );
+  });
+
+  it('test for numbers from 0 to 9', function() {
+    testForInputAndOutput(
+        `2
+        002308160
+        9850`,
+
+        `Case #1: 00((2(3)))0((((((((8)))))))1(((((6))))))0
+        Case #2: (((((((((9)8)))5)))))0`,
+    );
   });
 
 
