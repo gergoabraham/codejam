@@ -2,9 +2,9 @@
 
 global.test = true;
 
-const {lineReaderCallback, buildDiagonal} = require('./5-indicium');
+const {lineReaderCallback, buildDiagonal, solveTestCase} = require('./5-indicium');
 
-describe('Indicium', function() {
+describe.only('Indicium', function() {
   it('example test', function() {
     testForInputAndOutput(
         `2
@@ -37,10 +37,10 @@ describe('Indicium', function() {
 
           `Case #1: POSSIBLE
         1 2 3 4 5
-        5 1 2 3 4
-        4 5 1 2 3
-        3 4 5 1 2
-        2 3 4 5 1`,
+        2 1 4 5 3
+        3 5 1 2 4
+        4 3 5 1 2
+        5 4 2 3 1`,
       );
     });
   });
@@ -87,33 +87,28 @@ describe('Indicium', function() {
 
           `Case #1: POSSIBLE
         1 2 3 4
-        4 1 2 3
+        2 1 4 3
         3 4 1 2
-        2 3 4 1
+        4 3 2 1
         Case #2: POSSIBLE
         2 1 3 4
         1 2 4 3
-        4 3 1 2
-        3 4 2 1
+        3 4 1 2
+        4 3 2 1
         Case #3: POSSIBLE
         3 1 2 4
         1 2 4 3
         4 3 1 2
-        2 4 3 1`,
+        2 4 3 1
+        Case #4: POSSIBLE
+        4 1 2 3
+        1 2 3 4
+        3 4 1 2
+        2 3 4 1`,
       );
     });
   });
 
-
-  it('Calculator', function() {
-    const input = 'aabc';
-
-    console.log(
-        input
-            .split('')
-            .map((x) => x.charCodeAt(0) - 'a'.charCodeAt(0) + 1)
-            .reduce((sum, x) => sum + x));
-  });
 
   context('impossible cases', function() {
     it('2', function() {
@@ -220,6 +215,12 @@ describe('Indicium', function() {
       buildDiagonal(50, 2500).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]);
       buildDiagonal(50, 2498).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 49, 49]);
       buildDiagonal(50, 1634).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 17, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    });
+  });
+
+  context('some additional tests', function() {
+    it('yepyep', function() {
+      console.log(solveTestCase('6 12'));
     });
   });
 

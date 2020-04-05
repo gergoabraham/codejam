@@ -73,70 +73,71 @@ function solveTestCase(inputString) {
     rows[i][elem] = 1;
   });
 
-  const path = [];
-  const removedPath = [];
-  let removedCandidates = {};
-  let watchdog = 15;
+  const path = {
+    x: 0,
+    y: 0,
+    children: {},
+  };
 
-  for (let x = 0; x < N; x++) {
-    for (let y = 0; y < N; y++) {
-      if (x != y) {
-        let candidate = getCandidate(y, x, result, N);
+  let previous = path;
+  let n = 0;
+  while (n < N * N) {
+    let x = previous.x;
+    let y = previous.y;
+    ({x, y} = getNextCoordinate(x, y, N));
+    if (x==y) {
+      ({x, y} = getNextCoordinate(x, y, N));
+    }
+    if (x == N) {
+      break;
+    }
 
-        let counter = 0;
-        while ((columns[y][candidate] || rows[x][candidate] || removedCandidates[candidate]) && counter < N) {
-          candidate++;
-          candidate = (candidate > N) ? 1 : candidate;
-          counter++;
-        }
-
-        if (counter != N) {
-          removedCandidates = {};
-          result[x][y] = candidate;
-          columns[y][candidate] = 1;
-          rows[x][candidate] = 1;
-          // removedStep = undefined;
-
-          path.push({x, y, candidate});
-        } else {
-          const step = path.pop();
-          result[step.x][step.y] = undefined;
-          columns[step.y][step.candidate] = undefined;
-          rows[step.x][step.candidate] = undefined;
-
-          removedCandidates[step.candidate] = 1;
-
-          x = step.x;
-          y = step.y - 1;
-          watchdog--;
-
-          removedPath.push(step);
-        }
+    let i = 1;
+    // find first okay value
+    for (i = 1; i <= N; i++) {
+      if (!columns[y][i] && !rows[x][i] && !previous.children[i]) {
+        break;
       }
+    }
 
-      if (watchdog == 0) {
-        return 'POSSIBLE\n' + result.map((line) => line.join(' ')).join('\n');
-      }
+    if (i > N) {
+      x = previous.x;
+      y = previous.y;
+
+      result[x][y] = undefined;
+      columns[y][previous.value] = undefined;
+      rows[x][previous.value] = undefined;
+
+      previous = previous.parent;
+      n--;
+    } else {
+      const value = i;
+      result[x][y] = value;
+      columns[y][value] = 1;
+      rows[x][value] = 1;
+
+      const newNode = {
+        value: value,
+        x: x,
+        y: y,
+        parent: previous,
+        children: {},
+      };
+      previous.children[value] = newNode;
+      previous = newNode;
+
+      n++;
     }
   }
 
   return 'POSSIBLE\n' + result.map((line) => line.join(' ')).join('\n');
 }
 
-function getCandidate(y, x, result, N) {
-  let candidate;
-  if (y > 0) {
-    if (y == x + 1 && result[x][y - 1] > 1) {
-      candidate = 1;
-    } else {
-      candidate = (result[x][y - 1] + 1);
-      candidate = (candidate > N) ? 1 : candidate;
-    }
-  } else {
-    candidate = result[x - 1][y] - 1;
-    candidate = (candidate == 0) ? N : candidate;
-  }
-  return candidate;
+
+function getNextCoordinate(x, y, N) {
+  y = (y == N - 1) ? 0 : y + 1;
+  x = (y == 0) ? x + 1 : x;
+  return {y, x};
 }
 
 function buildDiagonal(N, K) {
@@ -166,7 +167,7 @@ function buildDiagonal(N, K) {
 
 
 if (global.test) {
-  module.exports = {lineReaderCallback, buildDiagonal};
+  module.exports = {lineReaderCallback, buildDiagonal, solveTestCase};
 } else {
   main();
 }

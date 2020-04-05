@@ -4,7 +4,7 @@ global.test = true;
 
 const {lineReaderCallback} = require('./3-parenting-partnering-returns');
 
-describe.only('Parenting Partnering Returns', function() {
+describe('Parenting Partnering Returns', function() {
   it('example test', function() {
     testForInputAndOutput(
         `4
