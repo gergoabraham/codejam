@@ -43,7 +43,7 @@ function collectInput(input, line, Ti, Ni) {
 
       Ni = 0;
     } else {
-      input.testCases[Ti].data[Ni] = line.split(' ').map((x) => Number(x));
+      input.testCases[Ti].data[Ni] = [Ni, ...line.split(' ').map((x) => Number(x))];
       Ni++;
 
       if (Ni == input.testCases[Ti].N) {
@@ -63,7 +63,27 @@ function returnWithResults(input, outputCallback) {
 
 
 function solveTestCase(testCase) {
-  return `IMPOSSIBLE`;
+  const assignees = Array(testCase.N);
+  const C = [[0, 0, 0]];
+  const J = [[0, 0, 0]];
+
+  const sortedData = testCase.data.sort((a, b) => a[1] - b[1]);
+
+  for (let i = 0; i < sortedData.length; i++) {
+    const x = sortedData[i];
+
+    if (x[1] >= C[C.length-1][2]) {
+      C.push(x);
+      assignees[x[0]] = 'C';
+    } else if (x[1] >= J[J.length-1][2]) {
+      J.push(x);
+      assignees[x[0]] = 'J';
+    } else {
+      return 'IMPOSSIBLE';
+    }
+  }
+
+  return assignees.join('');
 }
 
 
