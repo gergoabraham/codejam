@@ -4,8 +4,8 @@ global.test = true;
 
 const {lineReaderCallback, buildDiagonal} = require('./5-indicium');
 
-describe.only('Indicium', function() {
-  it.skip('example test', function() {
+describe('Indicium', function() {
+  it('example test', function() {
     testForInputAndOutput(
         `2
         3 6
@@ -77,7 +77,7 @@ describe.only('Indicium', function() {
         1 2 3`,
       );
     });
-    it.only('4x4', function() {
+    it('4x4', function() {
       testForInputAndOutput(
           `4
         4 4
