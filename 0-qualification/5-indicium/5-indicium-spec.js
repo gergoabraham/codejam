@@ -2,9 +2,9 @@
 
 global.test = true;
 
-const {lineReaderCallback, buildDiagonal, solveTestCase} = require('./5-indicium');
+const {lineReaderCallback, buildDiagonal} = require('./5-indicium');
 
-describe.only('Indicium', function() {
+describe('Indicium', function() {
   it('example test', function() {
     testForInputAndOutput(
         `2
@@ -215,12 +215,6 @@ describe.only('Indicium', function() {
       buildDiagonal(50, 2500).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]);
       buildDiagonal(50, 2498).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 49, 49]);
       buildDiagonal(50, 1634).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 17, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-    });
-  });
-
-  context('some additional tests', function() {
-    it('yepyep', function() {
-      console.log(solveTestCase('6 12'));
     });
   });
 

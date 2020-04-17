@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Sort of a backtracking algorithm to find matrices, but too slow.
+ *
+ * OK for test set 1.
+ * Not ok for test set 2.
+ */
 function main() {
   const readline = require('readline');
   const rl = readline.createInterface({
