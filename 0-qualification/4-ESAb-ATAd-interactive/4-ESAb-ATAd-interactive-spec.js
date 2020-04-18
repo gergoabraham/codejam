@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * Run local testing with command:
+ *    python interactive_runner.py python3 local_testing_tool.py 0 -- node 4-ESAb-ATAd-interactive.js
+ */
+
 global.test = true;
 
 const {lineReaderCallback} = require('./4-ESAb-ATAd-interactive');

@@ -29,7 +29,8 @@
             "error",
             {
                 "ignoreTemplateLiterals": true,
-                "ignoreStrings": true
+                "ignoreStrings": true,
+                "ignoreComments": true
             }
         ]
     }
