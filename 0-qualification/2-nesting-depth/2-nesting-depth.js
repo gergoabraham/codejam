@@ -21,8 +21,9 @@ function lineReaderCallback(rl, outputCallback) {
     ({input, Ti} = collectInput(input, line, Ti));
 
     if (Ti == input.T) {
-      rl.close();
       returnWithResults(input, outputCallback);
+      rl.close();
+      process.exit();
     }
   };
 }

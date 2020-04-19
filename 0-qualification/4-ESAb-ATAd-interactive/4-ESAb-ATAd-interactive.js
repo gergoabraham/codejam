@@ -39,6 +39,7 @@ function lineReaderCallback(rl, outputCallback) {
 
     if (line == 'N' || state.Ti > state.T) {
       rl.close();
+      process.exit(0);
     } else if (state.x > state.B/2) {
       outputCallback(state.array.map((x) => x.toString()).join(''));
     } else if (state.array[state.x - 1] == undefined) {
