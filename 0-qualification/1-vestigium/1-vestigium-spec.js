@@ -1,8 +1,8 @@
 'use strict';
 
-global.test = true;
+global.testEnvironment = true;
 
-const {lineReaderCallback} = require('./1-vestigium');
+const {getLineReaderCallback} = require('./1-vestigium');
 
 describe('Vestigium', function() {
   it('example test', function() {
@@ -80,7 +80,7 @@ describe('Vestigium', function() {
   function testForInputAndOutput(input, expectedOutput) {
     const actualOutputLines = [];
 
-    const callbackUnderTest = lineReaderCallback(
+    const callbackUnderTest = getLineReaderCallback(
         {close: () => {}},
         (result) => actualOutputLines.push(result),
     );

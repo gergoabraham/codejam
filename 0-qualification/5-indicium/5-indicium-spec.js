@@ -1,8 +1,8 @@
 'use strict';
 
-global.test = true;
+global.testEnvironment = true;
 
-const {lineReaderCallback, buildDiagonal} = require('./5-indicium');
+const {getLineReaderCallback, buildDiagonal} = require('./5-indicium');
 
 describe('Indicium', function() {
   it('example test', function() {
@@ -212,8 +212,11 @@ describe('Indicium', function() {
       buildDiagonal(5, 25).join('').should.deep.equal('55555');
     });
     it('50x50 diagonal building', function() {
+      // eslint-disable-next-line max-len
       buildDiagonal(50, 2500).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]);
+      // eslint-disable-next-line max-len
       buildDiagonal(50, 2498).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 49, 49]);
+      // eslint-disable-next-line max-len
       buildDiagonal(50, 1634).should.deep.equal([50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 17, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
     });
   });
@@ -221,7 +224,7 @@ describe('Indicium', function() {
   function testForInputAndOutput(input, expectedOutput) {
     const actualOutputLines = [];
 
-    const callbackUnderTest = lineReaderCallback(
+    const callbackUnderTest = getLineReaderCallback(
         {close: () => {}},
         (result) => actualOutputLines.push(...result.split('\n')),
     );

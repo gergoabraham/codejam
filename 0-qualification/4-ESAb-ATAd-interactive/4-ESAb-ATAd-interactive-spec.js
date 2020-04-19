@@ -5,9 +5,9 @@
  *    python interactive_runner.py python3 local_testing_tool.py 0 -- node 4-ESAb-ATAd-interactive.js
  */
 
-global.test = true;
+global.testEnvironment = true;
 
-const {lineReaderCallback} = require('./4-ESAb-ATAd-interactive');
+const {getLineReaderCallback} = require('./4-ESAb-ATAd-interactive');
 
 describe('ESAb ATAd', function() {
   const noOutput = 'no output';
@@ -568,7 +568,7 @@ describe('ESAb ATAd', function() {
   });
 
   function initInteractiveProblem(input) {
-    const callbackUnderTest = lineReaderCallback(
+    const callbackUnderTest = getLineReaderCallback(
         {close: () => closeCallCount++},
         (result) => query = result.toString());
 

@@ -32,6 +32,7 @@
                 "ignoreStrings": true,
                 "ignoreComments": true
             }
-        ]
+        ],
+        "valid-jsdoc": "off"
     }
 }

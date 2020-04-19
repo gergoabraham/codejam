@@ -2,43 +2,35 @@
 
 global.testEnvironment = true;
 
-const {getLineReaderCallback} = require('./3-parenting-partnering-returns');
+const {getLineReaderCallback} = require('./solution');
 
-describe('Parenting Partnering Returns', function() {
+describe('Multiple lines input', function() {
   it('example test', function() {
     testForInputAndOutput(
-        `4
+        `2
         3
-        360 480
-        420 540
-        600 660
-        3
-        0 1440
-        1 3
-        2 4
-        5
-        99 150
-        1 100
-        100 301
-        2 5
-        150 250
+        first
+        second
+        third
         2
-        0 720
-        720 1440`,
+        only
+        two`,
 
-        `Case #1: CJC
-        Case #2: IMPOSSIBLE
-        Case #3: JCCJJ
-        Case #4: CC`);
+        `Case #1: POSSIBLE
+        first second third
+        Case #2: POSSIBLE
+        only two`,
+    );
   });
 
 
+  /** Testing helpers from here ***********************************************/
   function testForInputAndOutput(input, expectedOutput) {
     const actualOutputLines = [];
 
     const callbackUnderTest = getLineReaderCallback(
         {close: () => {}},
-        (result) => actualOutputLines.push(result),
+        (result) => actualOutputLines.push(...result.split('\n')),
     );
 
     const inputLines = input.split('\n').map((x) =>x.trim());

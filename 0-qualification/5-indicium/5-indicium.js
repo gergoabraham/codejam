@@ -13,10 +13,10 @@ function main() {
     output: process.stdout,
   });
 
-  rl.on('line', lineReaderCallback(rl, console.log));
+  rl.on('line', getLineReaderCallback(rl, console.log));
 }
 
-function lineReaderCallback(rl, outputCallback) {
+function getLineReaderCallback(rl, outputCallback) {
   let input = {
     T: undefined,
   };
@@ -173,8 +173,8 @@ function buildDiagonal(N, K) {
 }
 
 
-if (global.test) {
-  module.exports = {lineReaderCallback, buildDiagonal, solveTestCase};
+if (global.testEnvironment) {
+  module.exports = {getLineReaderCallback, buildDiagonal, solveTestCase};
 } else {
   main();
 }

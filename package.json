@@ -4,6 +4,7 @@
   "author": "gergooo",
   "scripts": {
     "tdd0": "mocha --recursive ./0*/**/*-spec.js --watch",
+    "tdd1b": "mocha --recursive ./1B/**/*spec.js --watch",
     "test": "mocha --recursive ./**/*-spec.js"
   },
   "devDependencies": {

@@ -7,10 +7,10 @@ function main() {
     output: process.stdout,
   });
 
-  rl.on('line', lineReaderCallback(rl, console.log));
+  rl.on('line', getLineReaderCallback(rl, console.log));
 }
 
-function lineReaderCallback(rl, outputCallback) {
+function getLineReaderCallback(rl, outputCallback) {
   let input = {
     T: undefined,
   };
@@ -71,8 +71,8 @@ function solveTestCase(inputString) {
 }
 
 
-if (global.test) {
-  module.exports = {lineReaderCallback};
+if (global.testEnvironment) {
+  module.exports = {getLineReaderCallback};
 } else {
   main();
 }

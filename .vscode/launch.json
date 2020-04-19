@@ -7,13 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Mocha debug",
+            "name": "Debug 1B solution",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "args": [
                 "--recursive",
-                "./**/*-spec.js"
+                "./1B/**/spec.js"
             ],
             "program": "${workspaceFolder}\\node_modules\\mocha\\bin\\mocha"
         }
