@@ -102,6 +102,49 @@ function returnWithResults(state, outputCallback) {
  * */
 
 function solveTestCase(testCase) {
-  return `POSSIBLE\n${testCase.lines.join(' ')}`;
+  const matrix = testCase.lines.map((line)=>line.split(' ').map((x) => Number(x)));
+
+  // time complexity: linear
+  const k = getTrace(matrix);
+  const r = getRepeatingRows(matrix);
+  const c = getRepeatingColumns(matrix);
+
+  return `${k} ${r} ${c}`;
+}
+
+function getRepeatingColumns(matrix) {
+  let c = 0;
+  for (let ri = 0; ri < matrix.length; ri++) {
+    const elementsHashTable = {};
+    for (let ci = 0; ci < matrix[ri].length; ci++) {
+      elementsHashTable[matrix[ci][ri]] = 1;
+    }
+    if (Object.keys(elementsHashTable).length != matrix.length) {
+      c++;
+    }
+  }
+  return c;
+}
+
+function getRepeatingRows(matrix) {
+  let r = 0;
+  for (let ri = 0; ri < matrix.length; ri++) {
+    const elementsHashTable = {};
+    for (let ci = 0; ci < matrix[ri].length; ci++) {
+      elementsHashTable[matrix[ri][ci]] = 1;
+    }
+    if (Object.keys(elementsHashTable).length != matrix.length) {
+      r++;
+    }
+  }
+  return r;
+}
+
+function getTrace(matrix) {
+  let k = 0;
+  for (let i = 0; i < matrix.length; i++) {
+    k += matrix[i][i];
+  }
+  return k;
 }
 /** Solver function ***********************************************************/

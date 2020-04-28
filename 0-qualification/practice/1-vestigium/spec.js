@@ -29,31 +29,6 @@ describe.only('Vestigium', function() {
     );
   });
 
-  it('calc trace', function() {
-    testForInputAndOutput(
-        `3
-        4
-        1 2 3 4
-        2 1 4 3
-        3 4 1 2
-        4 3 2 1
-        4
-        2 2 2 2
-        2 3 2 3
-        2 2 2 3
-        2 2 2 2
-        3
-        2 1 3
-        1 3 2
-        1 2 3`,
-
-        `Case #1: 4
-        Case #2: 9
-        Case #3: 8`,
-    );
-  });
-
-
   /** Testing helpers from here ***********************************************/
   function testForInputAndOutput(input, expectedOutput) {
     const actualOutputLines = [];
