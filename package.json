@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "gergooo",
   "scripts": {
-    "tdd0": "mocha --recursive ./0*/**/*-spec.js --watch",
+    "tdd0": "mocha --recursive ./0*/**/*spec.js --watch",
     "tdd1b": "mocha --recursive ./1B/**/*spec.js --watch --timeout=40000",
     "test": "mocha --recursive ./**/*spec.js --forbid-only"
   },
