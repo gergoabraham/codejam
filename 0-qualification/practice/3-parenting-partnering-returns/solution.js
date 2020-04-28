@@ -102,6 +102,49 @@ function returnWithResults(state, outputCallback) {
  * */
 
 function solveTestCase(testCase) {
-  return `POSSIBLE\n${testCase.lines.join(' ')}`;
+  const sortedActivities = getSortedActivities(testCase);
+
+  const activitiesOfJ = [{end: 0}];
+  const activitiesOfC = [{end: 0}];
+
+  for (let i = 0; i < sortedActivities.length; i++) {
+    const activity = sortedActivities[i];
+    if (activity.start >= activitiesOfC[activitiesOfC.length - 1].end) {
+      activitiesOfC.push(activity);
+      activity.assignee = 'C';
+    } else if (activity.start >= activitiesOfJ[activitiesOfJ.length - 1].end) {
+      activitiesOfJ.push(activity);
+      activity.assignee = 'J';
+    } else {
+      return 'IMPOSSIBLE';
+    }
+  }
+
+  const result = getArrayOfAssigneesFrom(sortedActivities);
+
+  return `${result.join('')}`;
+}
+
+function getArrayOfAssigneesFrom(sortedActivities) {
+  const activitiesInOriginalOrder = sortedActivities
+      .sort((a, b) => (a.index - b.index));
+
+  const result = [];
+
+  activitiesInOriginalOrder
+      .forEach((activity) => result.push(activity.assignee));
+
+  return result;
+}
+
+function getSortedActivities(testCase) {
+  const activities = testCase.lines.map((line, index) => {
+    line = line.split(' ').map((x) => Number(x));
+    return {start: line[0], end: line[1], index: index};
+  });
+
+  const sortedActivities = activities.sort((a, b) => (a.start - b.start));
+
+  return sortedActivities;
 }
 /** Solver function ***********************************************************/
