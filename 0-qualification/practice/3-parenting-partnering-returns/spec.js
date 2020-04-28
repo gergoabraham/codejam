@@ -4,21 +4,32 @@ global.testEnvironment = true;
 
 const {getLineReaderCallback} = require('./solution');
 
-describe('Nesting depth', function() {
+describe.only('Parenting Partnering Returns', function() {
   it('example test', function() {
     testForInputAndOutput(
-        `5
-        0000
-        101
-        111000
-        1
-        0416`,
+        `4
+        3
+        360 480
+        420 540
+        600 660
+        3
+        0 1440
+        1 3
+        2 4
+        5
+        99 150
+        1 100
+        100 301
+        2 5
+        150 250
+        2
+        0 720
+        720 1440`,
 
-        `Case #1: 0000
-        Case #2: (1)0(1)
-        Case #3: (111)000
-        Case #4: (1)
-        Case #5: 0((((4)))1(((((6))))))`,
+        `Case #1: CJC
+        Case #2: IMPOSSIBLE
+        Case #3: JCCJJ
+        Case #4: CC`,
     );
   });
 
