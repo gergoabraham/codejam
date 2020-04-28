@@ -62,6 +62,22 @@ function returnWithResults(state, outputCallback) {
 
 /** Solver function. Boilerplate above this. **********************************/
 function solveTestCase(inputString) {
-  return `POSSIBLE\n${inputString}`;
+  // trick: add zeros to start and end
+  // therefore there is no need to check boundaries
+  inputString = `0${inputString}0`;
+
+  const result = [];
+
+  for (let i = 1; i < inputString.length; i++) {
+    const diff = Number(inputString.charAt(i)) -
+                    Number(inputString.charAt(i - 1));
+
+    const parenthesisToInsert = diff > 0 ? '(' : ')';
+
+    result.push(...Array(Math.abs(diff)).fill(parenthesisToInsert));
+    result.push(inputString.charAt(i));
+  }
+
+  return `${result.slice(0, result.length - 1).join('')}`;
 }
 /** Solver function ***********************************************************/

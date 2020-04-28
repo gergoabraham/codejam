@@ -7,14 +7,18 @@ const {getLineReaderCallback} = require('./solution');
 describe.only('Nesting depth', function() {
   it('example test', function() {
     testForInputAndOutput(
-        `2
-        1 2 3
-        4 5 6`,
+        `5
+        0000
+        101
+        111000
+        1
+        0416`,
 
-        `Case #1: POSSIBLE
-        1 2 3
-        Case #2: POSSIBLE
-        4 5 6`,
+        `Case #1: 0000
+        Case #2: (1)0(1)
+        Case #3: (111)000
+        Case #4: (1)
+        Case #5: 0((((4)))1(((((6))))))`,
     );
   });
 
