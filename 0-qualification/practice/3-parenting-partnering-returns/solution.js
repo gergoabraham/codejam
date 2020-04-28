@@ -104,16 +104,17 @@ function returnWithResults(state, outputCallback) {
 function solveTestCase(testCase) {
   const sortedActivities = getSortedActivities(testCase);
 
-  const activitiesOfJ = [{end: 0}];
-  const activitiesOfC = [{end: 0}];
+  let lastActivityOfJ = {end: 0};
+  let lastActivityOfC = {end: 0};
 
   for (let i = 0; i < sortedActivities.length; i++) {
     const activity = sortedActivities[i];
-    if (activity.start >= activitiesOfC[activitiesOfC.length - 1].end) {
-      activitiesOfC.push(activity);
+
+    if (activity.start >= lastActivityOfC.end) {
+      lastActivityOfC = activity;
       activity.assignee = 'C';
-    } else if (activity.start >= activitiesOfJ[activitiesOfJ.length - 1].end) {
-      activitiesOfJ.push(activity);
+    } else if (activity.start >= lastActivityOfJ.end) {
+      lastActivityOfJ = activity;
       activity.assignee = 'J';
     } else {
       return 'IMPOSSIBLE';
