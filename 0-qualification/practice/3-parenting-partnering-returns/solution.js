@@ -106,36 +106,23 @@ function solveTestCase(testCase) {
 
   let lastActivityOfJ = {end: 0};
   let lastActivityOfC = {end: 0};
+  const assignmentArray = Array(sortedActivities.length);
 
   for (let i = 0; i < sortedActivities.length; i++) {
     const activity = sortedActivities[i];
 
     if (activity.start >= lastActivityOfC.end) {
       lastActivityOfC = activity;
-      activity.assignee = 'C';
+      assignmentArray[activity.index] = 'C';
     } else if (activity.start >= lastActivityOfJ.end) {
       lastActivityOfJ = activity;
-      activity.assignee = 'J';
+      assignmentArray[activity.index] = 'J';
     } else {
       return 'IMPOSSIBLE';
     }
   }
 
-  const result = getArrayOfAssigneesFrom(sortedActivities);
-
-  return `${result.join('')}`;
-}
-
-function getArrayOfAssigneesFrom(sortedActivities) {
-  const activitiesInOriginalOrder = sortedActivities
-      .sort((a, b) => (a.index - b.index));
-
-  const result = [];
-
-  activitiesInOriginalOrder
-      .forEach((activity) => result.push(activity.assignee));
-
-  return result;
+  return `${assignmentArray.join('')}`;
 }
 
 function getSortedActivities(testCase) {
