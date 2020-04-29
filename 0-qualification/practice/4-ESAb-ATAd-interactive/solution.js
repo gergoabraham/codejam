@@ -93,7 +93,7 @@ function performComplementingIfNeeded(state, line) {
   if (state.samePair && Number(line) != state.samePair.value) {
     state.input = state.input.map((x) => complement(x));
 
-    state.samePair.value = !state.samePair.value;
+    state.samePair.value = complement(state.samePair.value);
     if (state.diffPair) {
       // diffPair is affected by complmenentation, so it is updated
       state.diffPair.value = complement(state.diffPair.value);
