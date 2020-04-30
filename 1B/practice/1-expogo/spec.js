@@ -4,7 +4,7 @@ global.testEnvironment = true;
 
 const {getLineReaderCallback} = require('./solution');
 
-describe.only('Expogo', function() {
+describe('Expogo', function() {
   it('example test', function() {
     testForInputAndOutput(
         `4
