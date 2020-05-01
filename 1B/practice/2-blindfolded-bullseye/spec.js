@@ -13,7 +13,7 @@ global.testEnvironment = true;
 
 const {getLineReaderCallback} = require('./solution');
 
-describe.only('Blindfolded Bullseye', function() {
+describe('Blindfolded Bullseye', function() {
   const noOutput = 'no output';
   let query;
   let callbackUnderTest;
