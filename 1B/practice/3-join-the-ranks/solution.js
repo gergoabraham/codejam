@@ -67,17 +67,79 @@ function returnWithResults(state, outputCallback) {
 /** Solver function. Boilerplate above this. **********************************/
 function solveTestCase(input) {
   const {R, S} = input;
+  const numberOfSteps = Math.ceil((S*R-R) / 2);
 
-  const numberOfSteps = (R - 1) * (S - 1);
-
-  const steps = Array(numberOfSteps);
-
-  for (let i = 0; i < steps.length; i++) {
-    const A = R * (S - 1) - i;
-    const B = Math.ceil((A-(S-1))/(S-1));
-    steps[i] = `${A} ${B}`;
-  }
+  const steps = calculateTheSteps(numberOfSteps, R, S);
 
   return `${numberOfSteps}\n${steps.join('\n')}`;
+}
+
+function calculateTheSteps(numberOfSteps, R, S) {
+  const steps = Array(numberOfSteps);
+  let deck = createDeck(R, S);
+
+  for (let i = 0; i < numberOfSteps; i++) {
+    const X = deck[0];
+    let A = putAllXCardsInA(deck, X);
+    let B;
+
+    if (isLastStepWhereXEqualsR(X, R, i, numberOfSteps)) {
+      B = putAllRemainingCardsInB(B, R, S, A);
+    } else {
+      const Y = deck[A];
+      A = putAllYCardsInA(deck, A, Y);
+
+      B = putFollowingCardsAndOneXCardInB(B, deck, A, X);
+    }
+
+    steps[i] = `${A} ${B}`;
+    deck = performStepOnDeck(deck, A, B);
+  }
+  return steps;
+}
+
+function putAllRemainingCardsInB(B, R, S, A) {
+  B = R * S - A;
+  return B;
+}
+
+function isLastStepWhereXEqualsR(X, R, i, numberOfSteps) {
+  return X == R && i == numberOfSteps - 1;
+}
+
+function performStepOnDeck(deck, A, B) {
+  return [...deck.slice(A, A + B), ...deck.slice(0, A), ...deck.slice(A + B)];
+}
+
+function putFollowingCardsAndOneXCardInB(B, deck, A, X) {
+  B = 0;
+  while (deck[B + A] != X) {
+    B++;
+  }
+  B++;
+  return B;
+}
+
+function putAllYCardsInA(deck, A, Y) {
+  while (deck[A] == Y) {
+    A++;
+  }
+  return A;
+}
+
+function putAllXCardsInA(deck, X) {
+  let j = 1;
+  while (deck[j] == X) {
+    j++;
+  }
+  return j;
+}
+
+function createDeck(R, S) {
+  const deck = Array(R * S);
+  for (let i = 0; i < deck.length; i++) {
+    deck[i] = (i) % R + 1;
+  }
+  return deck;
 }
 /** Solver function ***********************************************************/
