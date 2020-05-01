@@ -25,23 +25,6 @@ describe('Blindfolded Bullseye', function() {
   });
 
   /** Here come the tests ****************************************************/
-  it('init and start', function() {
-    callbackUnderTest = initInteractiveProblem('1 999999995 999999995');
-
-    expectThisAndAnswerThat('0 0', 'CENTER');
-    // expectThisAndAnswerThat('2', '1');
-    // expectThisAndAnswerThat('3', '2');
-    // expectThisAndAnswerThat('012', 'Y');
-
-    // expectThisAndAnswerThat('1', 's');
-    // expectThisAndAnswerThat('2', 'a');
-    // expectThisAndAnswerThat('3', 'jt');
-    // expectThisAndAnswerThat('sajt', 'Y');
-
-    // query.should.equal(noOutput);
-    // closeCallCount.should.equal(1);
-  });
-
   it('stop after CENTER, multiple cases', function() {
     callbackUnderTest = initInteractiveProblem('2 999999995 999999995');
 
