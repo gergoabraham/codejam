@@ -6,6 +6,7 @@
     "tdd-skeleton": "mocha --recursive ./skeletons/**/*spec.js --watch",
     "tdd0": "mocha --recursive ./0*/**/*spec.js --watch",
     "tdd1b": "mocha --recursive ./1B/**/*spec.js --watch --timeout=40000",
+    "tdd1c": "mocha --recursive ./1C/**/*spec.js --watch --timeout=40000",
     "test": "mocha --recursive ./**/*spec.js --forbid-only"
   },
   "devDependencies": {
