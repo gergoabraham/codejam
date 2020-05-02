@@ -5,7 +5,7 @@ global.testEnvironment = true;
 const {getLineReaderCallback} = require('./solution');
 const {sampleIn} = require('./sample.in');
 
-describe.only('Overrandomized', function() {
+describe('Overrandomized', function() {
   it('example test', function() {
     testForInputAndOutput(
         sampleIn,
