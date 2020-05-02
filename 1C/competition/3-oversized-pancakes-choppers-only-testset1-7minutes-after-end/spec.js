@@ -4,7 +4,7 @@ global.testEnvironment = true;
 
 const {getLineReaderCallback} = require('./solution');
 
-describe.only('Oversized pancake choppers', function() {
+describe('Oversized pancake choppers', function() {
   it('example test', function() {
     testForInputAndOutput(
         `4
