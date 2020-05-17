@@ -1,4 +1,6 @@
 # Google's Code Jam 2020
+Just like last year, I've attended the Code Jam 2020 competition this year, too. I was able to improve my results compared to last year, still I couldn't meet my goal of passing round 1 and bleeding out in round 2. My best result was **the 1520th place**. Almost. :-)
+
 ## Competitive vs practice submissions
 There are `competitive` and `practice` submissions for the rounds. You can read the summary for my competitive submissions below.
 
