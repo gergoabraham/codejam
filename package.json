@@ -10,10 +10,10 @@
     "test": "mocha --recursive ./**/*spec.js --forbid-only"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "eslint": "^6.8.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.23.0",
     "eslint-config-google": "^0.14.0",
-    "mocha": "^7.1.1"
+    "mocha": "^8.3.2"
   },
   "mocha": {
     "recursive": true,
