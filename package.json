@@ -7,6 +7,7 @@
     "tdd2020-0": "mocha --recursive ./2020/0*/**/*spec.js --watch",
     "tdd2020-1b": "mocha --recursive ./2020/1B/**/*spec.js --watch --timeout=40000",
     "tdd2020-1c": "mocha --recursive ./2020/1C/**/*spec.js --watch --timeout=40000",
+    "tdd2021-0": "mocha --recursive ./2021/0*/**/*spec.js --watch",
     "test": "mocha --recursive ./**/*spec.js --forbid-only"
   },
   "devDependencies": {
