@@ -4,9 +4,9 @@
   "author": "gergooo",
   "scripts": {
     "tdd-skeleton": "mocha --recursive ./skeletons/**/*spec.js --watch",
-    "tdd0": "mocha --recursive ./0*/**/*spec.js --watch",
-    "tdd1b": "mocha --recursive ./1B/**/*spec.js --watch --timeout=40000",
-    "tdd1c": "mocha --recursive ./1C/**/*spec.js --watch --timeout=40000",
+    "tdd2020-0": "mocha --recursive ./2020/0*/**/*spec.js --watch",
+    "tdd2020-1b": "mocha --recursive ./2020/1B/**/*spec.js --watch --timeout=40000",
+    "tdd2020-1c": "mocha --recursive ./2020/1C/**/*spec.js --watch --timeout=40000",
     "test": "mocha --recursive ./**/*spec.js --forbid-only"
   },
   "devDependencies": {
