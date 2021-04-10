@@ -9,6 +9,11 @@ There may be `competitive` and `practice` submissions for the rounds. You can re
 
 After the rounds, I usually try to improve myself by reading the analysises and solving the problems without time limit. I put these submissions into the `practice` folders, and indicate in the folder name, if it does *not* solve all the test sets.
 
+## Code quality disclaimer
+The code quality of the solutions is not the quality I'd commit into a pet or work project's repo. It's not very readable, and could bear some refactor. Or a lot. But here the readability and maintainability doesn't really matter, but being fast does.
+
+At least it is nicely tested I think. =)
+
 ## Environment
 Between rounds, I've created a skeleton for 3 different types of problems: problems with *one line input*, with *multiple line inputs*, and *interactive problems*.
 
