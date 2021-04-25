@@ -12,4 +12,7 @@ In the first problem I made two errors, because didn't think about two scenarios
 
 Second problem: 2 of 3 test sets are solved.
 
-That means 46 points of 100. [Here](https://codingcompetitions.withgoogle.com/codejam/submissions/000000000043585d/Z2VyZ29vbw) are my submissions.
+That means 46 points of 100 which was enough for position 2715th. [Here](https://codingcompetitions.withgoogle.com/codejam/submissions/000000000043585d/Z2VyZ29vbw) are my submissions.
+
+### Round 1B
+I was able to solve the first problem. Time, math, equation system combined with technical issues like too large numbers. [Here](https://codingcompetitions.withgoogle.com/codejam/submissions/0000000000435baf/Z2VyZ29vbw) is my solution.
