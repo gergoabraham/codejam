@@ -92,29 +92,27 @@ function returnWithResults(state, outputCallback) {
  * */
 
 class Module {
-  constructor(id, fun, parent) {
-    this.id = id;
+  constructor(fun) {
     this.fun = fun;
-    this.parent = parent;
-    this.children = [];
+    this.children = new Set();
   }
 }
 
 function solveTestCase(testCase) {
   const { N, funFactors, targets } = testCase;
 
-  const modules = new Array(N + 1);
-  modules[0] = new Module(0, 0, null);
+  const modules = new Map();
+  modules.set(0, new Module(0, 0, null));
 
   for (let i = 0; i < N; i++) {
-    const parentModule = modules[targets[i]];
-    const module = new Module(i + 1, funFactors[i], parentModule);
+    const parentModule = modules.get(targets[i]);
+    const module = new Module(funFactors[i]);
 
-    modules[i + 1] = module;
-    parentModule.children.push(module);
+    modules.set(i + 1, module);
+    parentModule.children.add(module);
   }
 
-  const result = traverse(modules[0]);
+  const result = traverse(modules.get(0));
 
   return result.outFun + result.fun;
 }
@@ -128,8 +126,8 @@ const traverse = (node) => {
   let outFun = 0;
   const childrenFun = [];
 
-  for (let i = 0; i < node.children.length; i++) {
-    const childResult = traverse(node.children[i]);
+  for (const child of node.children) {
+    const childResult = traverse(child);
 
     outFun += childResult.outFun;
     childrenFun.push(childResult.fun);
