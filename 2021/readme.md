@@ -1,7 +1,5 @@
 # Google's Code Jam 2021
 
-In progress...
-
 ## Competitive submissions
 
 ### Round 0: Qualification round
