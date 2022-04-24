@@ -12,6 +12,7 @@
     "tdd2021-1b": "mocha --recursive ./2021/1B/**/*spec.js --watch",
     "tdd2021-1c": "mocha --recursive ./2021/1C/**/*spec.js --watch",
     "tdd2022-0": "mocha --recursive ./2022/0*/**/*spec.js --watch",
+    "tdd2022-1b": "mocha --recursive ./2022/1B/**/*spec.js --watch",
     "test": "mocha --recursive ./**/*spec.js --forbid-only"
   },
   "devDependencies": {
