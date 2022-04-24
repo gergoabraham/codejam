@@ -2,11 +2,11 @@
 
 global.testEnvironment = true;
 
-const { getLineReaderCallback } = require('./solution');
+const { main } = require('./solution');
 
 describe('3D printing', function () {
-  it('example test', function () {
-    testForInputAndOutput(
+  it('example test', async function () {
+    await testForInputAndOutput(
       `3
         300000 200000 300000 500000
         300000 200000 500000 300000
@@ -25,19 +25,29 @@ describe('3D printing', function () {
   });
 
   /** Testing helpers from here ***********************************************/
-  function testForInputAndOutput(input, expectedOutput) {
+  async function testForInputAndOutput(input = '', expectedOutput) {
     const actualOutputLines = [];
-
-    const callbackUnderTest = getLineReaderCallback(
-      { close: () => {} },
-      (result) => actualOutputLines.push(...result.split('\n'))
-    );
+    const fakeOutputCallback = (result) =>
+      actualOutputLines.push(...result.split('\n'));
 
     const inputLines = input.split('\n').map((x) => x.trim());
+
+    await new Promise((resolve) => {
+      let inputListener;
+
+      const fakeRl = {
+        close: resolve,
+        on: (_, callback) => {
+          inputListener = callback;
+        },
+      };
+
+      main(fakeRl, fakeOutputCallback);
+
+      inputLines.forEach((line) => inputListener(line));
+    });
+
     const expectedOutputLines = expectedOutput.split('\n').map((x) => x.trim());
-
-    inputLines.forEach((line) => callbackUnderTest(line));
-
     actualOutputLines.should.deep.equal(expectedOutputLines);
   }
 });

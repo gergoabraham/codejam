@@ -2,12 +2,12 @@
 
 global.testEnvironment = true;
 
-const {getLineReaderCallback} = require('./solution');
+const { main } = require('./solution');
 
-describe('Multiple lines input', function() {
-  it('example test', function() {
-    testForInputAndOutput(
-        `2
+describe('Multiple lines input', function () {
+  it('example test', async function () {
+    await testForInputAndOutput(
+      `2
         3
         first
         second
@@ -16,28 +16,37 @@ describe('Multiple lines input', function() {
         only
         two`,
 
-        `Case #1: POSSIBLE
+      `Case #1: POSSIBLE
         first second third
         Case #2: POSSIBLE
-        only two`,
+        only two`
     );
   });
 
-
   /** Testing helpers from here ***********************************************/
-  function testForInputAndOutput(input, expectedOutput) {
+  async function testForInputAndOutput(input = '', expectedOutput) {
     const actualOutputLines = [];
+    const fakeOutputCallback = (result) =>
+      actualOutputLines.push(...result.split('\n'));
 
-    const callbackUnderTest = getLineReaderCallback(
-        {close: () => {}},
-        (result) => actualOutputLines.push(...result.split('\n')),
-    );
+    const inputLines = input.split('\n').map((x) => x.trim());
 
-    const inputLines = input.split('\n').map((x) =>x.trim());
-    const expectedOutputLines = expectedOutput.split('\n').map((x) =>x.trim());
+    await new Promise((resolve) => {
+      let inputListener;
 
-    inputLines.forEach((line) => callbackUnderTest(line));
+      const fakeRl = {
+        close: resolve,
+        on: (_, callback) => {
+          inputListener = callback;
+        },
+      };
 
+      main(fakeRl, fakeOutputCallback);
+
+      inputLines.forEach((line) => inputListener(line));
+    });
+
+    const expectedOutputLines = expectedOutput.split('\n').map((x) => x.trim());
     actualOutputLines.should.deep.equal(expectedOutputLines);
   }
 });

@@ -1,107 +1,75 @@
 'use strict';
 
-if (global.testEnvironment) {
-  module.exports = { getLineReaderCallback };
-} else {
-  main();
-}
-
-function main() {
+const startMain = async () => {
   const readline = require('readline');
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
 
-  rl.on('line', getLineReaderCallback(rl, console.log));
-}
+  main(rl, console.log);
+};
 
-/** The function that returns with the readline-callback function for:
- *  - storing input,
- *  - calculating result.
- *
- *  This is the function that is called from the test environment.
- */
-function getLineReaderCallback(rl, outputCallback) {
-  let state = {
-    T: undefined,
-    Ti: 0,
-    testCases: undefined,
-    /** array of:
-    {
-      length: undefined,
-      lines: undefined,
-      i: 0,
-    }, */
+const main = async (rl, outputCallback) => {
+  const lineBuffer = [];
+  const bufferListener = { current: null };
+  const notifyMe = (callback) => {
+    bufferListener.current = callback;
   };
 
-  return (line) => {
-    state = collectInput(state, line);
+  rl.on('line', (line) => {
+    lineBuffer.push(line);
 
-    if (state.Ti == state.T) {
-      returnWithResults(state, outputCallback);
-
-      rl.close();
-      process.exit();
+    if (bufferListener.current) {
+      const notify = bufferListener.current;
+      bufferListener.current = null;
+      notify();
     }
-  };
-}
-
-function collectInput(state, line) {
-  if (!state.T) {
-    state.T = Number(line);
-    state.testCases = Array(state.T);
-  } else {
-    if (state.testCases[state.Ti] == undefined) {
-      state.testCases[state.Ti] = {};
-    }
-
-    readTestCase(state, state.testCases[state.Ti], line);
-  }
-
-  return state;
-}
-
-function readTestCase(state, testCase, line) {
-  if (testCase.length == undefined) {
-    testCase.length = 3;
-
-    testCase.i = 0;
-    testCase.lines = Array(testCase.length);
-  }
-
-  /** Reading one line of input *********************/
-  testCase.lines[testCase.i] = line;
-  /** Reading one line of input *********************/
-
-  testCase.i++;
-  if (testCase.i == testCase.length) {
-    state.Ti++;
-  }
-}
-
-function returnWithResults(state, outputCallback) {
-  state.testCases.forEach((testCase, i) => {
-    outputCallback(`Case #${i + 1}: ${solveTestCase(testCase)}`);
   });
-}
 
-/** Solver function. Boilerplate above this. **********************************/
+  const readText = async () =>
+    new Promise((resolve) => {
+      if (lineBuffer.length) {
+        resolve(lineBuffer.shift());
+      } else {
+        notifyMe(() => resolve(lineBuffer.shift()));
+      }
+    });
 
-/** - Input:
- *      testCase {
- *        length: undefined,
- *        lines: undefined,
- *        i: 0,
- *      }
+  const readTexts = async () => (await readText()).split(' ');
+  const readNumber = async () => Number(await readText());
+  const readNumbers = async () => (await readTexts()).map((x) => Number(x));
+
+  const T = await readNumber();
+
+  for (let Ti = 1; Ti <= T; Ti++) {
+    const result = await solveTestCase(
+      readText,
+      readTexts,
+      readNumber,
+      readNumbers
+    );
+    outputCallback(`Case #${Ti}: ${result}`);
+  }
+
+  rl.close();
+  process.exit();
+};
+
+/** ********************************************************************
  *
- *  - Output: STRING for "Case #1: STRING"
- * */
-
-function solveTestCase(testCase) {
-  const printers = testCase.lines.map((line) =>
-    line.split(' ').map((x) => Number(x))
-  );
+ * @param {() => Promise<string>} readText
+ * @param {() => Promise<string[]>} readTexts
+ * @param {() => Promise<number>} readNumber
+ * @param {() => Promise<number[]>} readNumbers
+ * @returns
+ */
+// eslint-disable-next-line no-unused-vars
+const solveTestCase = async (readText, readTexts, readNumber, readNumbers) => {
+  const printers = Array(3);
+  printers[0] = await readNumbers();
+  printers[1] = await readNumbers();
+  printers[2] = await readNumbers();
 
   const minValues = printers.reduce(
     (prev, printer) => prev.map((x, i) => Math.min(x, printer[i])),
@@ -123,5 +91,14 @@ function solveTestCase(testCase) {
   }
 
   return minValues.join(' ');
+};
+
+/**********************************************************************/
+
+if (global.testEnvironment) {
+  module.exports = { main };
+} else {
+  startMain();
 }
+
 /** Solver function ***********************************************************/
