@@ -19,3 +19,9 @@ Regarding the 2nd challenge, `Controlled inflation`, the idea came too late: I f
 It came to my mind that it could be a simplified graph and e.g. Dijkstra's shortest path algorithm can solve the problem, so having inspiration from that, I was able to implement a linear time dynamic programming solution.
 
 [Here](https://codingcompetitions.withgoogle.com/codejam/submissions/000000000087711b/00000000005bdbd4) are my submissions.
+
+### Round 1C
+
+**2368th**
+
+I was able to fully solve the 1st challenge, `Letter Blocks`. [Here](https://codingcompetitions.withgoogle.com/codejam/submissions/0000000000877b42/00000000005bdbd4) are my submissions.
